@@ -36,8 +36,9 @@ class OrderOperation implements Operation {
     constructor (@inject(OrderDao) private orderDao: OrderDao) {}
 
     public setupOperation(router: Router): void {
-        router.get('/order', (req, res) => {
-            let order = this.orderDao.getOrderById(1);
+        router.get('/order/:orderId', (req, res) => {
+            let orderId = +req.param('orderId');
+            let order = this.orderDao.getOrderById(orderId);
             order.then((order) => {
                 res.send(JSON.stringify(order));
             });
