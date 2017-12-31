@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/build/server.js",
+            "program": "${workspaceFolder}/build/bootstrap.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

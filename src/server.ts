@@ -1,18 +1,17 @@
-import * as express from "express";
+import * as express from 'express';
 import { HelloWorld, Profile, Operation } from './operations/helloworld';
+import { injectable, multiInject } from 'inversify';
 
-
+@injectable()
 class Server {
 
     private app: express.Application;
     private operations: Operation[];
 
-    constructor() {
+    constructor(@multiInject("Operation") operations: Operation[]) {
         this.app = express();
         this.app.set("port", process.env.port || 3000);
-        this.operations = new Array();
-        this.operations.push(new HelloWorld());
-        this.operations.push(new Profile());
+        this.operations = operations;
     }
 
     public startServer(): void {
@@ -27,6 +26,3 @@ class Server {
 }
 
 export {Server};
-
-let server = new Server();
-server.startServer();

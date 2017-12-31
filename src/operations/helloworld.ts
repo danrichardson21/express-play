@@ -1,9 +1,11 @@
 import { Router, Request, Response } from "express";
+import { injectable } from "inversify";
 
 interface Operation {
     setupOperation(router: Router): void;
 }
 
+@injectable()
 class HelloWorld implements Operation {
 
     public setupOperation(router: Router): void {
@@ -17,6 +19,7 @@ class HelloWorld implements Operation {
     }
 }
 
+@injectable()
 class Profile implements Operation {
 
     public setupOperation(router: Router): void {

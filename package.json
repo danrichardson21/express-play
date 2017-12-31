@@ -12,9 +12,12 @@
   "author": "Dan Richardson",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "inversify": "^4.9.0",
+    "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
-    "@types/express": "^4.11.0"
+    "@types/express": "^4.11.0",
+    "@types/inversify": "^2.0.33"
   }
 }
