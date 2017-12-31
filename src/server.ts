@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { HelloWorld, Profile, Operation } from './operations/helloworld';
-import { injectable, multiInject } from 'inversify';
+import { injectable, multiInject, postConstruct } from 'inversify';
 
 @injectable()
 class Server {
@@ -14,6 +14,7 @@ class Server {
         this.operations = operations;
     }
 
+    @postConstruct()
     public startServer(): void {
         let router = express.Router();
         this.operations.forEach((operation) => operation.setupOperation(router));

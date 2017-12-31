@@ -8,6 +8,5 @@ container.bind<Operation>("Operation").to(HelloWorld);
 container.bind<Operation>("Operation").to(Profile);
 container.bind<Server>(Server).toSelf();
 
-var server = container.get<Server>(Server);
 
-export {server};
+var server = container.get<Server>(Server);
