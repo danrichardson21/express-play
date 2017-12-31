@@ -1,5 +1,6 @@
-import { Router, Request, Response } from "express";
-import { injectable } from "inversify";
+import { Router, Request, Response } from 'express';
+import { injectable, inject } from 'inversify';
+import { OrderDao } from '../db/db.orders';
 
 interface Operation {
     setupOperation(router: Router): void;
@@ -29,4 +30,20 @@ class Profile implements Operation {
     }
 }
 
-export { HelloWorld, Profile, Operation };
+@injectable()
+class OrderOperation implements Operation {
+
+    constructor (@inject(OrderDao) private orderDao: OrderDao) {}
+
+    public setupOperation(router: Router): void {
+        router.get('/order', (req, res) => {
+            let order = this.orderDao.getOrderById(1);
+            order.then((order) => {
+                res.send(JSON.stringify(order));
+            });
+        });
+    }
+
+}
+
+export { HelloWorld, Profile, Operation, OrderOperation };
