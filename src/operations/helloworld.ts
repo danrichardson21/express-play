@@ -1,11 +1,15 @@
 import { Router, Request, Response } from "express";
 
-class HelloWorld {
+interface Operation {
+    setupOperation(router: Router): void;
+}
 
-    public static setupHelloWorld(router: Router): void {
+class HelloWorld implements Operation {
+
+    public setupOperation(router: Router): void {
         router.get('/hello', (req, res) => {
-            new HelloWorld().handleRequest(req, res);
-        })
+            this.handleRequest(req, res);
+        });
     }
 
     private handleRequest(req: Request, res: Response): void {
@@ -13,4 +17,13 @@ class HelloWorld {
     }
 }
 
-export { HelloWorld };
+class Profile implements Operation {
+
+    public setupOperation(router: Router): void {
+        router.get('/profile', (req, res) => {
+            res.send('Dan');
+        });
+    }
+}
+
+export { HelloWorld, Profile, Operation };
