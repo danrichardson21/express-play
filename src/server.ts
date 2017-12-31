@@ -1,8 +1,10 @@
 import * as express from "express";
+import { HelloWorld } from './operations/helloworld';
 
-class server {
 
-    private app:express.Application;
+class Server {
+
+    private app: express.Application;
 
     constructor() {
         this.app = express();
@@ -10,10 +12,17 @@ class server {
     }
 
     public startServer(): void {
+        let router = express.Router();
+        HelloWorld.setupHelloWorld(router);
+        
+        this.app.use(router);
         this.app.listen(this.app.get("port"), () => {
             console.log('server started');
         });
     }
 }
 
-export {server};
+export {Server};
+
+let server = new Server();
+server.startServer();
