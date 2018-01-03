@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as bodyParser from  'body-parser';
 import { HelloWorld, Profile, Operation } from './operations/helloworld';
 import { injectable, multiInject, postConstruct } from 'inversify';
 
@@ -19,6 +20,7 @@ class Server {
         let router = express.Router();
         this.operations.forEach((operation) => operation.setupOperation(router));
         
+        this.app.use(bodyParser.json());
         this.app.use(router);
         this.app.listen(this.app.get("port"), () => {
             console.log('server started');

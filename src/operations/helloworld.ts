@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { injectable, inject } from 'inversify';
 import { OrderDao } from '../db/db.orders';
+import { Order } from 'common/types';
 
 interface Operation {
     setupOperation(router: Router): void;
@@ -42,6 +43,17 @@ class OrderOperation implements Operation {
             order.then((order) => {
                 res.send(JSON.stringify(order));
             });
+        });
+
+        router.post('/order', (req, res) => {
+            let order = req.body as Order;
+            res.send(JSON.stringify(order));
+        });
+
+        router.put('/order/:orderId', (req, res) => {
+            let order = req.body() as Order;
+            let orderId = +req.param('orderId');
+            order.Id = orderId;
         });
     }
 
