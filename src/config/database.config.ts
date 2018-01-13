@@ -5,7 +5,14 @@ const DATABASE_CONFIG: config = {
     user: 'sa',
     password: 'Dan123456',
     server: 'localhost',
-    database: 'TutorialDB'
+    database: 'TutorialDB',
+    pool: {
+        max: 5,
+        min: 1
+    },
+    options: {
+        abortTransactionOnError: true
+    }
 }
 
 export { DATABASE_CONFIG };

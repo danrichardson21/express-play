@@ -47,6 +47,7 @@ class OrderOperation implements Operation {
 
         router.post('/order', (req, res) => {
             let order = req.body as Order;
+            this.orderDao.saveOrder(order);
             res.send(JSON.stringify(order));
         });
 
